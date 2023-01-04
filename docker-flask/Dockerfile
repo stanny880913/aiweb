@@ -6,5 +6,7 @@ WORKDIR /docker-flask
 ADD . /docker-flask
 # 運行pip3來安裝Flask應用程序的依賴套件
 RUN pip install -r requirements.txt
+
+EXPOSE 5000
 # 執行python的指令語法
 CMD ["python","main.py"]

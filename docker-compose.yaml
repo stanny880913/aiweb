@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  frontend:
+    build:
+      context: docker-flask 
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: fastapi
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    restart: unless-stopped
