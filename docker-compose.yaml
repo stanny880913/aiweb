@@ -2,17 +2,23 @@ version: '3'
 services:
 
   frontend:
-    build:
-      context: docker-vue
-      dockerfile: Dockerfile
+    image: aiweb:1.0.0
+      #build:
+      #context: docker-vue
+      #dockerfile: Dockerfile
     ports:
       - 8080:8080
     restart: unless-stopped
-
+    volumes:
+      - ./docker-vue/src:/app/src
+      - ./docker-vue/babel.config.js:/app/babel.config.js
   backend:
-    build:
-      context: fastapi
-      dockerfile: Dockerfile
+    image: aiweb-backend:latest
+    #build:
+    #context: fastapi
+    #dockerfile: Dockerfile
     ports:
       - 8000:80
     restart: unless-stopped
+    volumes:
+      - ./fastapi:/app

@@ -5,75 +5,38 @@
   </div>
   <!-- 上传图片按钮 -->
   <div id="demo" v-show="uploadnum">
-    <input
-      type="file"
-      id="demo_file"
-      accept="image/*"
-      multiple
-      @change="update($event)"
-    />
+    <input type="file" id="demo_file" accept="image/*" multiple @change="update($event)" />
     DRAG & DROP <br />
-    IMAGE
+
   </div>
   <div id="look">
     <div id="look_img" v-for="(item, index) in imgSrc" :key="index">
       <img :src="item" alt="" />
       <div id="look_event">
-        <img
-          src="https://s1.ax1x.com/2022/08/08/vMEtPO.png"
-          alt=""
-          title="点击查看"
-          @click="look(index)"
-        />
-        <img
-          src="https://s1.ax1x.com/2022/08/08/vMEaxH.png"
-          alt=""
-          title="点击删除"
-          @click="deletes(index)"
-        />
+        <img src="https://s1.ax1x.com/2022/08/08/vMEtPO.png" alt="" title="点击查看" @click="look(index)" />
+        <img src="https://s1.ax1x.com/2022/08/08/vMEaxH.png" alt="" title="点击删除" @click="deletes(index)" />
       </div>
     </div>
   </div>
 
   <!-- 图片预览 -->
-  <div
-    id="preview"
-    v-if="show"
-    @click="
-      () => {
-        show = false;
-      }
-    "
-  >
+  <div id="preview" v-if="show" @click="
+    () => {
+      show = false;
+    }
+  ">
     <div id="preview_close">
-      <img
-        src="https://s1.ax1x.com/2022/08/08/vMEURe.png"
-        alt=""
-        title="关闭"
-        @click="
-          () => {
-            show = false;
-          }
-        "
-      />
+      <img src="https://s1.ax1x.com/2022/08/08/vMEURe.png" alt="" title="关闭" @click="
+        () => {
+          show = false;
+        }
+      " />
     </div>
     <div id="preview_last" v-if="pvwWhere != 0" @click.stop="previewLast()">
-      <img
-        src="https://s1.ax1x.com/2022/08/08/vMEBqI.png"
-        alt=""
-        title="上一张"
-      />
+      <img src="https://s1.ax1x.com/2022/08/08/vMEBqI.png" alt="" title="上一张" />
     </div>
-    <div
-      id="preview_next"
-      v-if="pvwWhere != imgSrc.length - 1"
-      @click.stop="previewNext()"
-    >
-      <img
-        src="https://s1.ax1x.com/2022/08/08/vMErZt.png"
-        alt=""
-        title="下一张"
-      />
+    <div id="preview_next" v-if="pvwWhere != imgSrc.length - 1" @click.stop="previewNext()">
+      <img src="https://s1.ax1x.com/2022/08/08/vMErZt.png" alt="" title="下一张" />
     </div>
     <img :src="pvwSrc" alt="" />
   </div>
@@ -234,7 +197,7 @@ export default {
   /* opacity: 50%; */
 }
 
-#look_img:hover #look_event > img {
+#look_img:hover #look_event>img {
   height: 2em;
 }
 
