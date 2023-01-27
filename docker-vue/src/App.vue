@@ -1,25 +1,25 @@
 <template>
-  <!-- 上传后显示 -->
+  <!-- 上傳完成後顯示 -->
   <div id="title">
     <h1>義大胸腔科</h1>
   </div>
-  <!-- 上传图片按钮 -->
+  <!-- 圖片上傳btn -->
   <div id="demo" v-show="uploadnum">
     <input type="file" id="demo_file" accept="image/*" multiple @change="update($event)" />
     DRAG & DROP <br />
-
+    IMAGE
   </div>
   <div id="look">
     <div id="look_img" v-for="(item, index) in imgSrc" :key="index">
       <img :src="item" alt="" />
       <div id="look_event">
-        <img src="https://s1.ax1x.com/2022/08/08/vMEtPO.png" alt="" title="点击查看" @click="look(index)" />
-        <img src="https://s1.ax1x.com/2022/08/08/vMEaxH.png" alt="" title="点击删除" @click="deletes(index)" />
+        <img src="https://s1.ax1x.com/2022/08/08/vMEtPO.png" alt="" title="check_img" @click="look(index)" />
+        <img src="https://s1.ax1x.com/2022/08/08/vMEaxH.png" alt="" title="delete_img" @click="deletes(index)" />
       </div>
     </div>
   </div>
 
-  <!-- 图片预览 -->
+  <!-- 圖片預覽 -->
   <div id="preview" v-if="show" @click="
     () => {
       show = false;
@@ -33,10 +33,10 @@
       " />
     </div>
     <div id="preview_last" v-if="pvwWhere != 0" @click.stop="previewLast()">
-      <img src="https://s1.ax1x.com/2022/08/08/vMEBqI.png" alt="" title="上一张" />
+      <img src="https://s1.ax1x.com/2022/08/08/vMEBqI.png" alt="" title="上一張" />
     </div>
     <div id="preview_next" v-if="pvwWhere != imgSrc.length - 1" @click.stop="previewNext()">
-      <img src="https://s1.ax1x.com/2022/08/08/vMErZt.png" alt="" title="下一张" />
+      <img src="https://s1.ax1x.com/2022/08/08/vMErZt.png" alt="" title="下一張" />
     </div>
     <img :src="pvwSrc" alt="" />
   </div>
@@ -47,12 +47,12 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    const imgSrc = ref([]); //已上传图片数组
-    const arrLength = ref(10000); //上传图片数量
-    const uploadnum = ref(true); //控制上传按钮的显示隐藏
-    const show = ref(false); //控制预览图片遮罩层显示隐藏
-    const pvwSrc = ref(null); //预览图片地址
-    const pvwWhere = ref(0); //选择哪一张进行预览以及控制上一张下一张
+    const imgSrc = ref([]); //已上傳圖片數组
+    const arrLength = ref(10000); //上传img數量
+    const uploadnum = ref(true); //控制上传按钮的显示隱藏
+    const show = ref(false); //控制預覽img遮罩層顯示隱藏
+    const pvwSrc = ref(null); //預覽img地址
+    const pvwWhere = ref(0); //选择哪一張进行預覽以及控制上一張下一張
 
     const update = (e) => {
       let file = e.target.files;
@@ -63,7 +63,7 @@ export default {
           let img = new FileReader();
 
           img.onloadend = ({ target }) => {
-            imgSrc.value.push(target.result); //将img转化为二进制数据
+            imgSrc.value.push(target.result); //将img轉化为二進位數據
             console.log("target", target.result);
             console.log("upload success!!");
             panduan();
@@ -72,7 +72,7 @@ export default {
         }
       }
     };
-    //判断照片数量是否满足规定数量；满足则隐藏上传按钮
+    //判斷照片數量是否滿足規定數量；滿足則隱藏上傳按钮
     const panduan = () => {
       if (imgSrc.value.length >= arrLength.value) {
         uploadnum.value = false;
@@ -81,12 +81,12 @@ export default {
       }
     };
     panduan();
-    //删除图片
+    // delete img
     const deletes = (i) => {
       imgSrc.value.splice(i, 1);
       panduan();
     };
-    //图片预览
+    //img預覽
     const look = (i) => {
       console.log(imgSrc.value);
       pvwWhere.value = i;
@@ -94,12 +94,12 @@ export default {
       pvwSrc.value = imgSrc.value[pvwWhere.value];
       console.log("image:", pvwSrc);
     };
-    //预览：上一张功能
+    //預覽：上一張功能
     const previewLast = () => {
       pvwWhere.value--;
       pvwSrc.value = imgSrc.value[pvwWhere.value];
     };
-    //预览：下一张功能
+    //預覽：下一張功能
     const previewNext = () => {
       pvwWhere.value++;
       pvwSrc.value = imgSrc.value[pvwWhere.value];
